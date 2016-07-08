@@ -29,7 +29,8 @@
 	<!-- 	login check (Interceptor)	 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+			<mvc:mapping path="/*" />
+			<mvc:mapping path="/*.post" />
 			<mvc:exclude-mapping path="/img/*"/>
 			<bean class="com.project.picturact.member.controller.Interceptor" />
 		</mvc:interceptor>

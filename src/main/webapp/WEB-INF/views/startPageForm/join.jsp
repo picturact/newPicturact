@@ -11,7 +11,41 @@
 
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">        
 <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript">
 
+$.ajaxSetup({
+	type : "POST",
+	async : true,
+	dataType : "json",
+	error : function(xhr){
+		alert("error html = " + xhr.statusText);
+	}
+});
+$(function(){
+	$("#joinId").blur(function(){
+		$.ajax({
+			url:"/joinIdCheck.join",
+	// 			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
+			data:{	
+				joinId:$("#joinId").val()
+			},
+			success:function(data){
+				idCheck(data);
+			}
+		});
+	});
+	function idCheck(data){
+		if(data.result=="OK"){
+			alert($("#joinId").val()+" can use!!");
+			$("#joinPassword").focus();
+		} else {
+			alert("Already used..");
+			$("#joinId").val("");
+			$("#joinId").focus();
+		}
+	}
+});
+</script>
 </head>
 <body>
                         	<div class="form-top" >
@@ -26,7 +60,7 @@
 			                    <form action="/join.join" method="post">
 			                    	<div class="form-group">
 			                    		<!-- ID -->
-			                        	<input type="text" placeholder="Input your ID..." class="form-control" name="userId" id="userId">
+			                        	<input type="text" placeholder="Input your ID..." class="form-control" name="userId" id="joinId">
 			                        </div>
 			                        <div class="form-group">
 			                        	<!-- PASSWORD -->
@@ -47,19 +81,6 @@
 			                        	<!-- E-MAIL -->
 			                        	<input type="text" placeholder="E-mail..." class="form-control" name="eMail" id="eMail">
 			                        </div>
-<!-- 			                        <div class="form-group"> -->
-<!-- 			                        	메모 -->
-<!-- 			                        	<textarea placeholder="About yourself...(선택)" class="form-control" name="userMemo" id="userMemo"></textarea> -->
-<!-- 			                        </div> -->
-          							
-<!--           							<div class="form-group"> -->
-<!-- 			                        	관리자 확인 -->
-<!-- 			                        	관리자여부 : -->
-<!-- 			                        	<select name="admin"> -->
-<!-- 			                        		<option>Yes</option> -->
-<!-- 			                        		<option selected="selected">No</option> -->
-<!-- 			                        	</select> -->
-<!-- 			                        </div> -->
 			                        
 			                        <span style="float:right">
 <!-- 				                        <input type="button" class="btn btn-default" value="Join" /> -->

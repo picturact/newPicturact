@@ -35,7 +35,6 @@ public class MemberController {
 	
 
 	@RequestMapping(value="/login.login")
-	@ResponseBody
 	public ModelAndView login(String userId, String userPassword, HttpSession session){
 		return loginService.loginCheck(userId, userPassword, session);
 	}
@@ -71,4 +70,9 @@ public class MemberController {
 		return mav;
 	}
 
+	@RequestMapping(value="/joinIdCheck.join")
+	public ModelAndView joinIdCheck(String joinId){
+		return joinService.joinIdCheck(joinId);
+	}
+	
 }

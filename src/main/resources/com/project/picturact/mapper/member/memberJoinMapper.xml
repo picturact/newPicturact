@@ -9,4 +9,8 @@
 		INSERT INTO PICTURACT_MEMBER VALUES(#{userId},#{password},#{nickname},#{username},#{email}, null, null, null,'n')
 	</insert>	
 
+	<select id="joinIdCheck" parameterType="String" resultType="String">
+		SELECT USERID FROM PICTURACT_MEMBER WHERE USERID=#{joinId} 
+	</select>
+
 </mapper>

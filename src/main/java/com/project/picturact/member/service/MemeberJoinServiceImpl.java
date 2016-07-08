@@ -22,4 +22,19 @@ public class MemeberJoinServiceImpl implements MemberJoinService {
 		System.out.println("memberJoinServiceImpl ¿Ï·á");
 	}
 
+	@Override
+	public ModelAndView joinIdCheck(String joinId) {
+//		Id find Database
+		String result = memberJoinDao.joinIdCheck(joinId);
+		System.out.println("result :"+result);
+		mav = new ModelAndView();
+		
+		if(result == null){
+			result="OK";
+			mav.addObject("result", result);
+		}
+		mav.setViewName("JSON");
+		return mav;
+	}
+
 }
